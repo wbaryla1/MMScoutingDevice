@@ -14,6 +14,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class ScoutingDeviceCommand implements CommandExecutor {
     @Override
@@ -23,29 +24,39 @@ public class ScoutingDeviceCommand implements CommandExecutor {
                 sender.sendMessage(ChatColor.DARK_RED + "You cannot run this command");
                 return true;
             }
+            args[0] = (args[0] == "" || args[0] == null) ? "1" : args[0];
             Player player = (Player)sender;
             if (!(player.isOp()))
                 return false;
             if (player.getInventory().firstEmpty() == -1) {
                 Location loc = player.getLocation();
                 World world = player.getWorld();
-                try {
-                    for (int i = 0; i < Integer.parseInt(args[0]); i++)
-                        world.dropItemNaturally(loc, getItem());
-                }
-                catch (NumberFormatException ex) {
-                    args[0] = "0";
+
+                if (args[0] == "1") {
+                    world.dropItemNaturally(loc, getItem());
+                } else {
+                    try {
+                        for (int i = 0; i < Integer.parseInt(Objects.requireNonNull(args[0])); i++)
+                            world.dropItemNaturally(loc, getItem());
+                    } catch (NumberFormatException ex) {
+                        //nothing
+                    }
                 }
                 player.sendMessage(ChatColor.GOLD + "The scouting device has been given to you");
                 return true;
             }
-            try {
-                for (int i = 0; i < Integer.parseInt(args[0]); i++)
-                    player.getInventory().addItem(getItem());
+            if (args[0] == "1") {
+                player.getInventory().addItem(getItem());
             }
-            catch (NumberFormatException ex) {
-                args[0] = "0";
+            else {
+                try {
+                    for (int i = 0; i < Integer.parseInt(args[0]); i++)
+                        player.getInventory().addItem(getItem());
+                } catch (NumberFormatException ex) {
+                    args[0] = "0";
+                }
             }
+
             player.sendMessage(ChatColor.GOLD + "The scouting device has been given to you");
             return true;
         }
