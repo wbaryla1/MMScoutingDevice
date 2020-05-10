@@ -57,6 +57,8 @@ public class ScoutingDeviceCommand implements CommandExecutor {
                 }
             }
 
+            //test
+
             player.sendMessage(ChatColor.GOLD + "The scouting device has been given to you");
             return true;
         }
