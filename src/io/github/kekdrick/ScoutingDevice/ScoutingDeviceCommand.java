@@ -24,7 +24,6 @@ public class ScoutingDeviceCommand implements CommandExecutor {
                 sender.sendMessage(ChatColor.DARK_RED + "You cannot run this command");
                 return true;
             }
-            args[0] = (args[0] == "" || args[0] == null) ? "1" : args[0];
             Player player = (Player)sender;
             if (!(player.isOp()))
                 return false;
@@ -32,7 +31,7 @@ public class ScoutingDeviceCommand implements CommandExecutor {
                 Location loc = player.getLocation();
                 World world = player.getWorld();
 
-                if (args[0] == "1") {
+                if (args.length == 0) {
                     world.dropItemNaturally(loc, getItem());
                 } else {
                     try {
@@ -45,7 +44,7 @@ public class ScoutingDeviceCommand implements CommandExecutor {
                 player.sendMessage(ChatColor.GOLD + "The scouting device has been given to you");
                 return true;
             }
-            if (args[0] == "1") {
+            if (args.length == 0) {
                 player.getInventory().addItem(getItem());
             }
             else {
@@ -53,7 +52,7 @@ public class ScoutingDeviceCommand implements CommandExecutor {
                     for (int i = 0; i < Integer.parseInt(args[0]); i++)
                         player.getInventory().addItem(getItem());
                 } catch (NumberFormatException ex) {
-                    args[0] = "0";
+                    //nothing
                 }
             }
 
