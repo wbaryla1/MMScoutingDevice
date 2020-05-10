@@ -78,8 +78,6 @@ public class Main extends JavaPlugin implements Listener {
                             else
                                 xLoc = "";
 
-                            //test
-
                             String direction = (zLoc != "" && xLoc != "") ? zLoc + " " + xLoc :
                                     (zLoc != "") ? zLoc : (xLoc != "") ? xLoc : "close";
 
