@@ -1,0 +1,7 @@
+main: io.github.kekdrick.ScoutingDevice.Main
+name: Scouting-Device
+version: 1.0
+author: Kekdrick
+
+commands:
+  scoutdev:
