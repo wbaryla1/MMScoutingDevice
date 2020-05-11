@@ -6,4 +6,7 @@
 * `/scoutdevice <amount>
   * Gives <amount> of Scouting Devices
 
-## Command can only be run by OP's.
+## Notes:
+
+* `Command can only be run by OP's.`
+* `5 second cooldown`
