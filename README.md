@@ -3,7 +3,7 @@
 ## Usage:
 * `/scoutdevice`
   * Gives 1 Scouting Device (with no arguments)
-* `/scoutdevice <amount>
+* `/scoutdevice <amount>`
   * Gives <amount> of Scouting Devices
 
 ## Notes:
