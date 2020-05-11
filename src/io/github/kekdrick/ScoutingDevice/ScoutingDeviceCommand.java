@@ -19,7 +19,7 @@ import java.util.Objects;
 public class ScoutingDeviceCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if (label.equalsIgnoreCase("scoutdev")) {
+        if (label.equalsIgnoreCase("scoutdevice")) {
             if (!(sender instanceof Player)) {
                 sender.sendMessage(ChatColor.DARK_RED + "You cannot run this command");
                 return true;

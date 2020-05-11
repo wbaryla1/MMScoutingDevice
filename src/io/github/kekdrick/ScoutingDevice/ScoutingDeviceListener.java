@@ -1,6 +1,7 @@
 package io.github.kekdrick.ScoutingDevice;
 
 import org.bukkit.ChatColor;
+import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
@@ -42,6 +43,8 @@ public class ScoutingDeviceListener implements Listener {
                     playerCount = cCount = nCount = neCount = eCount = seCount = sCount = swCount = wCount = nwCount = 0;
                     for (Entity e : player.getNearbyEntities(250,40,250)) {
                         if (e instanceof Player) {
+                            if (((Player) e).getGameMode() == GameMode.CREATIVE || ((Player) e).getGameMode() == GameMode.SPECTATOR)
+                                continue;
                             playerCount++;
                             Location eLoc = e.getLocation();
                             Location playerLoc = player.getLocation();
@@ -105,8 +108,6 @@ public class ScoutingDeviceListener implements Listener {
                             e.sendMessage("You feel as though your presence is detected by an unfamiliar device");
                             //player.sendMessage(ChatColor.RED + "Heathen detected " + direction + " from here.");
                         }
-
-
                     }
 
                     HashMap<String, Integer> locations = new HashMap<String, Integer>();
@@ -133,12 +134,11 @@ public class ScoutingDeviceListener implements Listener {
     }
 
     public void RemoveDevice(Player player) {
-        for (ItemStack item : player.getInventory()) {
-            if (item.getType().equals(Material.COMPASS)) {
-                if (Objects.requireNonNull(item.getItemMeta()).hasLore()) {
+        ItemStack item = player.getInventory().getItemInMainHand();
+        if (item.getType().equals(Material.COMPASS)) {
+            if (Objects.requireNonNull(item.getItemMeta()).hasLore())
+                if (item.getItemMeta().getDisplayName().contains("Scouting Device"))
                     item.setAmount(item.getAmount() - 1);
-                }
-            }
         }
     }
 }

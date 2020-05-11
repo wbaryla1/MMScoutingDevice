@@ -11,7 +11,7 @@ public class Main extends JavaPlugin implements Listener {
     public void onEnable() {
         this.getServer().getPluginManager().registerEvents(new ScoutingDeviceListener(), this);
 
-        this.getCommand("scoutdev").setExecutor(new ScoutingDeviceCommand());
+        this.getCommand("scoutdevice").setExecutor(new ScoutingDeviceCommand());
     }
 
     @Override
