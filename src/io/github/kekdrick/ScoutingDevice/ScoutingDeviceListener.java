@@ -4,8 +4,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.Player;
+import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
@@ -51,21 +50,16 @@ public class ScoutingDeviceListener implements Listener {
                             String xLoc;
                             String zLoc;
 
-
-
-
-                            if ((playerLoc.getZ() - eLoc.getZ()) > 40)
+                            if ((playerLoc.getZ() - eLoc.getZ()) > 20)
                                 zLoc = "North";
-                            else if ((eLoc.getZ() - playerLoc.getZ()) > 40)
+                            else if ((eLoc.getZ() - playerLoc.getZ()) > 20)
                                 zLoc = "South";
                             else
                                 zLoc = "";
 
-
-
-                            if ((playerLoc.getX() - eLoc.getX()) > 40)
+                            if ((playerLoc.getX() - eLoc.getX()) > 20)
                                 xLoc = "West";
-                            else if ((eLoc.getX() - playerLoc.getX()) > 40)
+                            else if ((eLoc.getX() - playerLoc.getX()) > 20)
                                 xLoc = "East";
                             else
                                 xLoc = "";
@@ -103,8 +97,6 @@ public class ScoutingDeviceListener implements Listener {
                                     break;
                             }
 
-
-
                             e.sendMessage(ChatColor.RED + "You feel as though your presence is detected by an unfamiliar device...");
                             //player.sendMessage(ChatColor.RED + "Heathen detected " + direction + " from here.");
                         }
@@ -124,9 +116,9 @@ public class ScoutingDeviceListener implements Listener {
                     for (Map.Entry<String, Integer> entry : locations.entrySet()) {
                         if (entry.getValue() == 0)
                             continue;
-                        player.sendMessage(ChatColor.RED + "" + entry.getValue() + " people located " + entry.getKey());
+                        player.sendMessage(ChatColor.RED + "" + entry.getValue() + ((entry.getValue() == 1) ? " person " : " people ") + "located " + entry.getKey());
                     }
-                    player.sendMessage(ChatColor.GREEN + "" + playerCount + " people detected.");
+                    player.sendMessage(ChatColor.GREEN + "" + playerCount + ((playerCount == 1) ? " person " : " people ") + "detected.");
                     RemoveDevice(player);
                 }
             }
