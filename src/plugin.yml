@@ -5,3 +5,10 @@ author: Kekdrick
 
 commands:
   scoutdevice:
+    usage: /scoutdevice <amount>
+    permission: scoutdevice.admin
+
+permissions:
+  scoutdevice.admin:
+    description: User may spawn Scout Devices and distribute to other players.
+    default: op
