@@ -64,9 +64,9 @@ public class ScoutingDeviceListener implements Listener {
 
 
                             if ((playerLoc.getX() - eLoc.getX()) > 40)
-                                xLoc = "East";
-                            else if ((eLoc.getX() - playerLoc.getX()) > 40)
                                 xLoc = "West";
+                            else if ((eLoc.getX() - playerLoc.getX()) > 40)
+                                xLoc = "East";
                             else
                                 xLoc = "";
 
@@ -105,7 +105,7 @@ public class ScoutingDeviceListener implements Listener {
 
 
 
-                            e.sendMessage("You feel as though your presence is detected by an unfamiliar device");
+                            e.sendMessage(ChatColor.RED + "You feel as though your presence is detected by an unfamiliar device...");
                             //player.sendMessage(ChatColor.RED + "Heathen detected " + direction + " from here.");
                         }
                     }
