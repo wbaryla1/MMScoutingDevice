@@ -53,14 +53,19 @@ public class Main extends JavaPlugin implements Listener {
 
                     cooldowns.put(player.getName(), System.currentTimeMillis() + (5 * 1000));
 
-                    int playerCount = 0;
-                    for (Entity e : player.getNearbyEntities(250,250,250)) {
-                        if (e instanceof Player) {
+                    int playerCount, cCount, nCount, neCount, eCount, seCount, sCount, swCount,
+                            wCount, nwCount;
+
+                    playerCount = cCount = nCount = neCount = eCount = seCount = sCount = swCount = wCount = nwCount = 0;
+                    for (Entity e : player.getNearbyEntities(250,40,250)) {
+                        //if (e instanceof Player) {
                             playerCount++;
                             Location eLoc = e.getLocation();
                             Location playerLoc = player.getLocation();
                             String xLoc;
                             String zLoc;
+
+
 
 
                             if ((playerLoc.getZ() - eLoc.getZ()) > 40)
@@ -69,6 +74,7 @@ public class Main extends JavaPlugin implements Listener {
                                 zLoc = "South";
                             else
                                 zLoc = "";
+
 
 
                             if ((playerLoc.getX() - eLoc.getX()) > 40)
@@ -81,9 +87,60 @@ public class Main extends JavaPlugin implements Listener {
                             String direction = (zLoc != "" && xLoc != "") ? zLoc + " " + xLoc :
                                     (zLoc != "") ? zLoc : (xLoc != "") ? xLoc : "close";
 
-                            e.sendMessage("You feel as though your presence is detected by an unfamiliar device");
-                            player.sendMessage(ChatColor.RED + "Heathen detected " + direction + " from here.");
-                        }
+                            switch (direction) {
+                                case "North":
+                                    nCount++;
+                                    break;
+                                case "North East":
+                                    neCount++;
+                                    break;
+                                case "East":
+                                    eCount++;
+                                    break;
+                                case "South East":
+                                    seCount++;
+                                    break;
+                                case "South":
+                                    sCount++;
+                                    break;
+                                case "South West":
+                                    swCount++;
+                                    break;
+                                case "West":
+                                    wCount++;
+                                    break;
+                                case "North West":
+                                    nwCount++;
+                                    break;
+                                default:
+                                    cCount++;
+                                    break;
+                            }
+
+
+
+                            //e.sendMessage("You feel as though your presence is detected by an unfamiliar device");
+                            //player.sendMessage(ChatColor.RED + "Heathen detected " + direction + " from here.");
+                        //}
+
+
+                    }
+
+                    HashMap<String, Integer> locations = new HashMap<String, Integer>();
+                    locations.put("North", nCount);
+                    locations.put("North East", neCount);
+                    locations.put("East", eCount);
+                    locations.put("South East", seCount);
+                    locations.put("South", sCount);
+                    locations.put("South West", swCount);
+                    locations.put("West", wCount);
+                    locations.put("North West", nwCount);
+                    locations.put("Close By", cCount);
+
+                    for (Map.Entry<String, Integer> entry : locations.entrySet()) {
+                        if (entry.getValue() == 0)
+                            continue;
+                        player.sendMessage(ChatColor.RED + "" + entry.getValue() + " people located " + entry.getKey());
                     }
                     player.sendMessage(ChatColor.GREEN + "" + playerCount + " people detected.");
                     RemoveDevice(player);
