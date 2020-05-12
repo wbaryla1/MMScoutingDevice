@@ -41,9 +41,9 @@ public class ScoutingDeviceListener implements Listener {
 
                     playerCount = cCount = nCount = neCount = eCount = seCount = sCount = swCount = wCount = nwCount = 0;
                     for (Entity e : player.getNearbyEntities(250,40,250)) {
-                        //if (e instanceof Player) {
-                            //if (((Player) e).getGameMode() == GameMode.CREATIVE || ((Player) e).getGameMode() == GameMode.SPECTATOR)
-                                //continue;
+                        if (e instanceof Player) {
+                            if (((Player) e).getGameMode() == GameMode.CREATIVE || ((Player) e).getGameMode() == GameMode.SPECTATOR)
+                                continue;
                             //playerCount++;
                             Location eLoc = e.getLocation();
                             Location playerLoc = player.getLocation();
@@ -88,7 +88,7 @@ public class ScoutingDeviceListener implements Listener {
 
                             e.sendMessage(ChatColor.RED + "You feel as though your presence is detected by an unfamiliar device...");
                             //player.sendMessage(ChatColor.RED + "Heathen detected " + direction + " from here.");
-                        //}
+                        }
                     }
 
                     HashMap<String, Integer> locations = new HashMap<String, Integer>();
