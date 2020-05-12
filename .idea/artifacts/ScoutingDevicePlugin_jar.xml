@@ -1,9 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="jar" name="ScoutingDevicePlugin:jar">
-    <output-path>$USER_HOME$/Desktop/Spigot 1.15.2 Server/plugins</output-path>
-    <root id="archive" name="ScoutingDevicePlugin.jar">
-      <element id="module-output" name="ScoutingDevicePlugin" />
-      <element id="extracted-dir" path="$USER_HOME$/Downloads/spigot-1.15.2.jar" path-in-jar="/" />
-    </root>
-  </artifact>
-</component>
