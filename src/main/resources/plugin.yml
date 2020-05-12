@@ -1,4 +1,4 @@
-main: io.github.kekdrick.ScoutingDevice.Main
+main: io.github.wbaryla1.ScoutingDevicePlugin
 name: Scouting-Device
 version: 1.0
 author: Kekdrick

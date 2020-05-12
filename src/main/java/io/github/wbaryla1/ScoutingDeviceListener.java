@@ -1,10 +1,11 @@
-package io.github.kekdrick.ScoutingDevice;
+package io.github.wbaryla1;
 
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.entity.*;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
@@ -13,7 +14,6 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 public class ScoutingDeviceListener implements Listener {
     Map<String, Long> cooldowns = new HashMap<String, Long>();
@@ -41,10 +41,10 @@ public class ScoutingDeviceListener implements Listener {
 
                     playerCount = cCount = nCount = neCount = eCount = seCount = sCount = swCount = wCount = nwCount = 0;
                     for (Entity e : player.getNearbyEntities(250,40,250)) {
-                        if (e instanceof Player) {
-                            if (((Player) e).getGameMode() == GameMode.CREATIVE || ((Player) e).getGameMode() == GameMode.SPECTATOR)
-                                continue;
-                            playerCount++;
+                        //if (e instanceof Player) {
+                            //if (((Player) e).getGameMode() == GameMode.CREATIVE || ((Player) e).getGameMode() == GameMode.SPECTATOR)
+                                //continue;
+                            //playerCount++;
                             Location eLoc = e.getLocation();
                             Location playerLoc = player.getLocation();
                             String xLoc;
@@ -67,39 +67,28 @@ public class ScoutingDeviceListener implements Listener {
                             String direction = (zLoc != "" && xLoc != "") ? zLoc + " " + xLoc :
                                     (zLoc != "") ? zLoc : (xLoc != "") ? xLoc : "close";
 
-                            switch (direction) {
-                                case "North":
-                                    nCount++;
-                                    break;
-                                case "North East":
-                                    neCount++;
-                                    break;
-                                case "East":
-                                    eCount++;
-                                    break;
-                                case "South East":
-                                    seCount++;
-                                    break;
-                                case "South":
-                                    sCount++;
-                                    break;
-                                case "South West":
-                                    swCount++;
-                                    break;
-                                case "West":
-                                    wCount++;
-                                    break;
-                                case "North West":
-                                    nwCount++;
-                                    break;
-                                default:
-                                    cCount++;
-                                    break;
-                            }
+                            if (direction == "North")
+                                nCount++;
+                            else if (direction == "North East")
+                                neCount++;
+                            else if (direction == "East")
+                                eCount++;
+                            else if (direction == "South East")
+                                seCount++;
+                            else if (direction == "South")
+                                sCount++;
+                            else if (direction == "South West")
+                                swCount++;
+                            else if (direction == "West")
+                                wCount++;
+                            else if (direction == "North West")
+                                nwCount++;
+                            else
+                                cCount++;
 
                             e.sendMessage(ChatColor.RED + "You feel as though your presence is detected by an unfamiliar device...");
                             //player.sendMessage(ChatColor.RED + "Heathen detected " + direction + " from here.");
-                        }
+                        //}
                     }
 
                     HashMap<String, Integer> locations = new HashMap<String, Integer>();
@@ -113,11 +102,14 @@ public class ScoutingDeviceListener implements Listener {
                     locations.put("North West", nwCount);
                     locations.put("Close By", cCount);
 
+
                     for (Map.Entry<String, Integer> entry : locations.entrySet()) {
                         if (entry.getValue() == 0)
                             continue;
                         player.sendMessage(ChatColor.RED + "" + entry.getValue() + ((entry.getValue() == 1) ? " person " : " people ") + "located " + entry.getKey());
                     }
+                    playerCount = nCount + neCount + eCount + seCount + sCount + swCount + wCount + nwCount + cCount;
+
                     player.sendMessage(ChatColor.GREEN + "" + playerCount + ((playerCount == 1) ? " person " : " people ") + "detected.");
                     RemoveDevice(player);
                 }
@@ -128,7 +120,7 @@ public class ScoutingDeviceListener implements Listener {
     public void RemoveDevice(Player player) {
         ItemStack item = player.getInventory().getItemInMainHand();
         if (item.getType().equals(Material.COMPASS)) {
-            if (Objects.requireNonNull(item.getItemMeta()).hasLore())
+            if (item.getItemMeta().hasLore())
                 if (item.getItemMeta().getDisplayName().contains("Scouting Device"))
                     item.setAmount(item.getAmount() - 1);
         }

@@ -1,12 +1,9 @@
-package io.github.kekdrick.ScoutingDevice;
+package io.github.wbaryla1;
 
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.util.*;
-
-public class Main extends JavaPlugin implements Listener {
-
+public class ScoutingDevicePlugin extends JavaPlugin implements Listener {
     @Override
     public void onEnable() {
         this.getServer().getPluginManager().registerEvents(new ScoutingDeviceListener(), this);
@@ -16,8 +13,6 @@ public class Main extends JavaPlugin implements Listener {
 
     @Override
     public void onDisable() {
-
+        //nothing
     }
-
-
 }

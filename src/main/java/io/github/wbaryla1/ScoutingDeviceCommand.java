@@ -1,4 +1,4 @@
-package io.github.kekdrick.ScoutingDevice;
+package io.github.wbaryla1;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -14,10 +14,8 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class ScoutingDeviceCommand implements CommandExecutor {
-    @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (label.equalsIgnoreCase("scoutdevice")) {
             if (!(sender instanceof Player)) {
@@ -35,7 +33,7 @@ public class ScoutingDeviceCommand implements CommandExecutor {
                     world.dropItemNaturally(loc, getItem());
                 } else {
                     try {
-                        for (int i = 0; i < Integer.parseInt(Objects.requireNonNull(args[0])); i++)
+                        for (int i = 0; i < Integer.parseInt(args[0]); i++)
                             world.dropItemNaturally(loc, getItem());
                     } catch (NumberFormatException ex) {
                         //nothing
