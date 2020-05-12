@@ -10,3 +10,4 @@
 
 * `Command can only be run by OP's.`
 * `5 second cooldown`
+* `Right clicking will consume one charge of the scout device and locate players in an approximate direction in a 250 block radius.`
